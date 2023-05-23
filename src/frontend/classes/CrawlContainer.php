@@ -405,6 +405,7 @@ class CrawlContainer extends BaseObject
      */
     public function urlStatus($url)
     {
+        $ret = true;
         $this->verbosePrint('Inspect URL Status', $url);
 
         $url = self::cleanUrl($url);
@@ -494,10 +495,11 @@ class CrawlContainer extends BaseObject
             if ($model) {
                 $model->delete();
             }
+            $ret = false;
         }
 
         unset($model);
-        return true;
+        return $ret;
     }
 
     /**

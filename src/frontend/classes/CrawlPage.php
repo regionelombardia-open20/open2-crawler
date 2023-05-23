@@ -73,17 +73,22 @@ class CrawlPage extends BaseObject
     {
         if ($this->_crawler === null) {
             try {
+                $redirect = false;
                 $this->client   = new Client();
-                $this->_crawler = $this->client->request('GET', $this->pageUrl);
-                if (strpos($this->pageUrl, $this->baseHost) === 0) {
+                do{
+                    $this->_crawler = $this->client->request('GET', $this->pageUrl);
                     $this->verbosePrint("[GENERATE REQUEST TO]", $this->pageUrl);
-
-                    if ($this->client->getInternalResponse()->getStatus() !== 200) {
-                        $this->verbosePrint("[!] ".$this->pageUrl, "Response Status is not 200");
-                        $this->_crawler = false;
+                    if($this->client->getInternalResponse()->getStatus() === 302)
+                    {
+                        $this->pageUrl = $this->client->getInternalResponse()->getHeader("Location");
+                        $redirect =true;
+                    }else{
+                        $redirect =false;
                     }
-                } else {
-                    $this->verbosePrint("[BASE URL NOT MATCH WITH BASEHOST]", $this->pageUrl);
+                }
+                while($redirect);
+                if ($this->client->getInternalResponse()->getStatus() !== 200) {
+                    $this->verbosePrint("[!] ".$this->pageUrl, "Response Status is not 200");
                     $this->_crawler = false;
                 }
             } catch (\Exception $e) {
@@ -222,7 +227,13 @@ class CrawlPage extends BaseObject
             return null;
         }
 
-        return $crawler->filterXPath('//html')->attr('lang');
+        try {
+            return  $crawler->filterXPath('//html')->attr('lang');
+        } catch (\Exception $e) {
+            // catch "The current node list is empty." exception
+        }
+
+        return null;
     }
 
     public function getTitleTag()
