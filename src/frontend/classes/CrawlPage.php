@@ -75,9 +75,15 @@ class CrawlPage extends BaseObject
             try {
                 $this->client   = new Client();
                 $this->_crawler = $this->client->request('GET', $this->pageUrl);
-                $this->verbosePrint("[GENERATE REQUEST TO]", $this->pageUrl);
-                if ($this->client->getInternalResponse()->getStatus() !== 200) {
-                    $this->verbosePrint("[!] ".$this->pageUrl, "Response Status is not 200");
+                if (strpos($this->pageUrl, $this->baseHost) === 0) {
+                    $this->verbosePrint("[GENERATE REQUEST TO]", $this->pageUrl);
+
+                    if ($this->client->getInternalResponse()->getStatus() !== 200) {
+                        $this->verbosePrint("[!] ".$this->pageUrl, "Response Status is not 200");
+                        $this->_crawler = false;
+                    }
+                } else {
+                    $this->verbosePrint("[BASE URL NOT MATCH WITH BASEHOST]", $this->pageUrl);
                     $this->_crawler = false;
                 }
             } catch (\Exception $e) {

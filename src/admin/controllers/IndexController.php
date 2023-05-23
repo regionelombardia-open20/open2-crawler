@@ -9,5 +9,5 @@ namespace open2\crawler\admin\controllers;
  */
 class IndexController extends \luya\admin\ngrest\base\Controller
 {
-    public $modelClass = '\open2\crawler\models\Index';
+    public $modelClass = '\open2\crawler\models\Index';    
 }

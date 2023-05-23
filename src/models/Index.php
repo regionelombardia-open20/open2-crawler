@@ -381,7 +381,7 @@ class Index extends NgRestModel
      * @return mixed
      */
     public function preview($word, $cutAmount = 150,
-                            $highlight = '<span style="background-color:#FFEBD1; color:black;">%s</span>')
+                            $highlight = '<span style="background-color:#FFEBD1; color:black; margin: 0;">%s</span>')
     {
         $module = \Yii::$app->getModule('crawler');
         if (!empty($module) && !empty($module->performance) && $module->performance == true) {
@@ -395,7 +395,7 @@ class Index extends NgRestModel
             if ($pos !== false) {
                 $originalWord = substr($content, $pos, $lenWord);
                 return \Yii::$app->formatter->asHtml(html_entity_decode('<p>...'.substr($content, $pos - $cutAmount,
-                                $cutAmount).'<span style="background-color:#FFEBD1; color:black;">'.$originalWord.'</span>'.substr($content,
+                                $cutAmount).'<span style="background-color:#FFEBD1; color:black; margin: 0;">'.$originalWord.'</span>'.substr($content,
                                 $pos + $lenWord, $cutAmount).'...</p>'));
             } else {
                 $split = explode(' ', $word);
@@ -410,7 +410,7 @@ class Index extends NgRestModel
                         unset($newSplit[$searchK]);
 
                         $originalWord = substr($content, $pos, $lenWord);
-                        $ret          = '<p>...'.substr($content, $pos - $cutAmount, $cutAmount).'<span style="background-color:#FFEBD1; color:black;">'.$originalWord.'</span>'.substr($content,
+                        $ret          = '<p>...'.substr($content, $pos - $cutAmount, $cutAmount).'<span style="background-color:#FFEBD1; color:black; margin: 0;">'.$originalWord.'</span>'.substr($content,
                                 $pos + $lenWord, $cutAmount).'...</p>';
                         foreach ($newSplit as $newV) {
                             $newPos = strpos(strtolower($ret), strtolower($newV));
@@ -418,7 +418,7 @@ class Index extends NgRestModel
                                 $newLenWord   = strlen($newV);
                                 $originalWord = substr($ret, $newPos, $newLenWord);
 
-                                $ret = substr($ret, 0, $newPos).'<span style="background-color:#FFEBD1; color:black;">'.$originalWord.'</span>'.substr($ret,
+                                $ret = substr($ret, 0, $newPos).'<span style="background-color:#FFEBD1; color:black; margin: 0;">'.$originalWord.'</span>'.substr($ret,
                                         $newPos + $newLenWord);
                             }
                         }
@@ -459,7 +459,7 @@ class Index extends NgRestModel
         $lenWord = strlen($words);
         if ($pos !== false) {
             $originalWord = substr($content, $pos, $lenWord);
-            return \Yii::$app->formatter->asHtml(html_entity_decode(substr($content, 0, $pos).'<span style="background-color:#FFEBD1; color:black;">'.$originalWord.'</span>'.substr($content,
+            return \Yii::$app->formatter->asHtml(html_entity_decode(substr($content, 0, $pos).'<span style="background-color:#FFEBD1; color:black; margin: 0;">'.$originalWord.'</span>'.substr($content,
                             $pos + $lenWord)));
         } else {
             $split = explode(' ', $words);

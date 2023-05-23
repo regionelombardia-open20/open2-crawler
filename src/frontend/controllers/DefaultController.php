@@ -32,7 +32,7 @@ class DefaultController extends \luya\web\Controller
      * @return string
      */
     public function actionIndex($query = null, $page = null, $group = null)
-    {
+    { 
         $language = Yii::$app->composition->getKey('langShortCode');
         
         if (empty($query)) {
