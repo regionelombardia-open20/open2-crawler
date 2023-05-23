@@ -48,6 +48,12 @@ final class Module extends \luya\base\Module
      * ```
      */
     public $baseUrl;
+
+    /**
+     *
+     * @var type
+     */
+     public $suffixBaseUrlLang = ['en/eng'];
     
     /**
      * @var array An array with regular expression (including delimiters) which will be applied to found links so you can
@@ -92,23 +98,30 @@ final class Module extends \luya\base\Module
      */ 
     public $encodeUrl = false;
 
+    public $skipUrl = [
+        '/sondaggi/frontend/compila',
+        'en/404',
+        'en/homepage',
+        'attachments/file/view',
+        ];
+
     /**
      *
      * @var type
      */
-    public $maxNumberUrls = 10000;
+    public $maxNumberUrls = 15000;
 
     /**
      * 
      * @var type
      */
-    public $notDeleteOldResult = true;
+    public $notDeleteOldResult = false;
 
     /**
      * Set to true the first time, then execute the crawler every day
      * @var type
      */
-    public $initialization = false;
+    public $initialization = true;
     
     /**
      * @inheritdoc

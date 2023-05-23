@@ -23,6 +23,7 @@ use yii\console\widgets\Table;
  */
 class CrawlController extends \luya\console\Command
 {
+    public $verboseDebug = true;
     
     public function actionIndex($resume = false)
     {
@@ -33,6 +34,7 @@ class CrawlController extends \luya\console\Command
             'baseUrl' => $this->module->baseUrl,
             'filterRegex' => $this->module->filterRegex,
             'verbose' => $this->verbose,
+            'verboseDebug' => $this->verboseDebug,
             'doNotFollowExtensions' => $this->module->doNotFollowExtensions,
             'useH1' => $this->module->useH1,
             'resume' => $resume,
@@ -42,6 +44,7 @@ class CrawlController extends \luya\console\Command
         
         $table = new Table();
         $table->setHeaders(['status', 'url', 'message']);
+        $table->setScreenWidth(80);
         $table->setRows($container->getReport());
         $this->output($table->run());
         $this->outputInfo('memory usage: ' . FileHelper::humanReadableFilesize(memory_get_usage()));
@@ -49,4 +52,13 @@ class CrawlController extends \luya\console\Command
         
         return $this->outputSuccess('Crawler finished in ' . $timeElapsed . ' min.');
     }
+
+     /**
+     * @inheritdoc
+     */
+    public function options($actionID)
+    {
+        return ['verbose', 'interactive', 'verboseDebug'];
+    }
+
 }

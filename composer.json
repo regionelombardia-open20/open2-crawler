@@ -1,5 +1,5 @@
 {
-    "name": "open20/open2-crawler",
+    "name": "open2/crawler",
     "description": "An full search page crawler to enable complex and customized searching abilities.",
     "type": "luya-module",
     "keywords": ["php", "luya", "module", "crawler", "yii2", "yii", "luya-module"],

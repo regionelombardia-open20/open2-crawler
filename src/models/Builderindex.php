@@ -67,8 +67,8 @@ class Builderindex extends NgRestModel
     public function scenarios()
     {
         return [
-            'restcreate' => ['url', 'content', 'title', 'language_info', 'url_found_on_page', 'group'],
-            'restupdate' => ['url', 'content', 'title', 'language_info', 'url_found_on_page', 'group'],
+            'restcreate' => ['url', 'content', 'title', 'language_info', 'url_found_on_page', 'group', 'processed'],
+            'restupdate' => ['url', 'content', 'title', 'language_info', 'url_found_on_page', 'group', 'processed'],
             'default' => ['url', 'content', 'title', 'language_info', 'content_hash', 'is_dublication', 'url_found_on_page',
                 'group', 'description', 'processed'],
         ];

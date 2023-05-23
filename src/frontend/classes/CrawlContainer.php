@@ -65,7 +65,8 @@ class CrawlContainer extends BaseObject
     /**
      * @var boolean Whether verbositiy is enabled or not.
      */
-    public $verbose = false;
+    public $verbose      = false;
+    public $verboseDebug = false;
 
     /**
      * @var array|boolean Define an array of extension where the links should automatically not follow in order to save memory.
@@ -137,6 +138,18 @@ class CrawlContainer extends BaseObject
      */
     protected function getCrawler($url)
     {
+        $module = \Yii::$app->getModule('crawler');
+
+        foreach ($module->skipUrl as $skipUrl) {
+            if (strpos($this->encodeUrl($url), $skipUrl) !== false) {
+                $this->verbosePrint("[SKIPPED ENCODED URL]: ", $url);
+                return null;
+            }
+            if (strpos($url, $skipUrl) !== false) {
+                $this->verbosePrint("[SKIPPED URL]: ", $url);
+                return null;
+            }
+        }
         if (!array_key_exists($url, $this->_crawlers)) {
             $crawler               = new CrawlPage(['baseUrl' => $this->baseUrl, 'pageUrl' => $url, 'verbose' => $this->verbose,
                 'useH1' => $this->useH1]);
@@ -332,16 +345,15 @@ class CrawlContainer extends BaseObject
             return false;
         }
 
-        if (strpos($url, 'void(0)')) {
+        if (strpos($url, 'void(0)') !== false) {
             $this->verbosePrint("[SKIP URL]: ", $url);
             return false;
         }
-        if (strpos($url, 'tel:')) {
+        if (strpos($url, 'tel:') !== false) {
             $this->verbosePrint("[SKIP URL]: ", $url);
             return false;
         }
 
-        $type = $this->getCrawler($url)->getContentType();
 
         $module = \Yii::$app->getModule('crawler');
         if ($module->encodeUrl === true && $url !== $this->encodeUrl($url)) {
@@ -349,6 +361,19 @@ class CrawlContainer extends BaseObject
             $this->addLog('invalid_encode', $url, 'contains invalid chars');
             return false;
         }
+
+        foreach ($module->skipUrl as $skipUrl) {
+            if (strpos($this->encodeUrl($url), $skipUrl) !== false) {
+                $this->verbosePrint("[SKIPPED ENCODED URL]: ", $url);
+                return false;
+            }
+            if (strpos($url, $skipUrl) !== false) {
+                $this->verbosePrint("[SKIPPED URL]: ", $url);
+                return false;
+            }
+        }
+
+        $type = $this->getCrawler($url)->getContentType();
 
         if (strpos($type, 'text/html') === false) {
             $this->verbosePrint('link "'.$url.'" is not type of content "text/html"', $type);
@@ -401,7 +426,7 @@ class CrawlContainer extends BaseObject
             // add the url to the index
             $crawler = $this->getCrawler($url);
             if ($this->filterUrlIsValid($url) && !empty($crawler)) {
-                $model = Builderindex::addToIndex($url, $crawler->getTitle(), 'unknown');
+                $model                = Builderindex::addToIndex($url, $crawler->getTitle(), 'unknown');
                 // update the urls content                
                 $model->content       = $crawler->getContent();
                 $model->group         = $crawler->getGroup();

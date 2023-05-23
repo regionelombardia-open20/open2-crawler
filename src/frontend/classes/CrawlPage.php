@@ -24,9 +24,10 @@ class CrawlPage extends BaseObject
     public $client;
     public $baseUrl;
     public $baseHost;
-    public $useH1   = false;
+    public $useH1        = false;
     private $_crawler;
-    public $verbose = false;
+    public $verbose      = false;
+    public $verboseDebug = false;
 
     public function __clone()
     {
@@ -48,9 +49,11 @@ class CrawlPage extends BaseObject
         }
     }
 
-    public function verbosePrint($key, $value = null)
+    public function verbosePrint($key, $value = null, $debug = false)
     {
-        if ($this->verbose) {
+        if (($this->verboseDebug == true && $debug == true) || ($this->verboseDebug == false && $this->verbose == true)) {
+            echo $key.': '.$value.PHP_EOL;
+        } else if ($this->verbose && $this->verboseDebug == false) {
             echo $key.': '.$value.PHP_EOL;
         }
     }
@@ -94,16 +97,40 @@ class CrawlPage extends BaseObject
                 return '';
             }
 
+            $pageUrl   = rtrim($this->pageUrl, '/');
+            $baseUrl   = rtrim(\Yii::$app->getModule('crawler')->baseUrl, '/');
+            $suffixArr = \Yii::$app->getModule('crawler')->suffixBaseUrlLang;
+            $urls[]    = $baseUrl;
+            foreach ($suffixArr as $urlPage) {
+                $urls[] = rtrim($baseUrl.'/'.ltrim($urlPage, '/'), '/');
+            }
+
+            if (!in_array($pageUrl, $urls)) {
+                $crawler->filter('nav')->each(function (Crawler $crawler) {
+                    foreach ($crawler as $node) {
+                        $node->parentNode->removeChild($node);
+                    }
+                });
+                $crawler->filter('footer')->each(function (Crawler $crawler) {
+                    foreach ($crawler as $node) {
+                        $node->parentNode->removeChild($node);
+                    }
+                });
+            }
+
+
             $crawler->filter('script')->each(function (Crawler $crawler) {
                 foreach ($crawler as $node) {
                     $node->parentNode->removeChild($node);
                 }
             });
+
             $crawler->filter('style')->each(function (Crawler $crawler) {
                 foreach ($crawler as $node) {
                     $node->parentNode->removeChild($node);
                 }
             });
+
 
             return $crawler->filter('body')->html();
         } catch (\Exception $e) {
@@ -169,9 +196,9 @@ class CrawlPage extends BaseObject
                         ], HTTP_URL_JOIN_QUERY | HTTP_URL_STRIP_FRAGMENT);
                 } else {
                     $links[$key][1] = self::cleanupString(http_build_url($url,
-                            [
-                        'query' => (isset($url2['query'])) ? $url2['query'] : [],
-                            ], HTTP_URL_JOIN_QUERY | HTTP_URL_STRIP_FRAGMENT));
+                                [
+                            'query' => (isset($url2['query'])) ? $url2['query'] : [],
+                                ], HTTP_URL_JOIN_QUERY | HTTP_URL_STRIP_FRAGMENT));
                 }
             }
 
