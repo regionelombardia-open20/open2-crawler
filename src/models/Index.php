@@ -221,7 +221,7 @@ class Index extends NgRestModel
      *
      * @param [type] $query
      * @param [type] $languageInfo
-     * @return void
+     * @return array
      */
     public static function generateRelevanceArray($query, $languageInfo)
     {
@@ -322,7 +322,7 @@ class Index extends NgRestModel
      * 
      * @param array $item
      * @param [type] $keyword
-     * @return void
+     * @return string
      */
     private static function calculatePageRelevanceValue(array $item, $keyword)
     {

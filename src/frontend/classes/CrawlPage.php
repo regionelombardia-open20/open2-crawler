@@ -73,16 +73,16 @@ class CrawlPage extends BaseObject
     {
         if ($this->_crawler === null) {
             try {
-                $redirect = false;
-                $this->client   = new Client();
-                do{
+                $redirect     = false;
+                $this->client = new Client();
+                do {
                     $this->_crawler = $this->client->request('GET', $this->pageUrl);
                     if (strpos($this->pageUrl, $this->baseHost) === 0) {
                         $this->verbosePrint("[GENERATE REQUEST TO]", $this->pageUrl);
-    
+
                         if ($this->client->getInternalResponse()->getStatus() === 302) {
                             $this->pageUrl = $this->client->getInternalResponse()->getHeader("Location");
-                            $redirect = true;
+                            $redirect      = true;
                         } else {
                             $redirect = false;
                         }
@@ -90,8 +90,7 @@ class CrawlPage extends BaseObject
                         $this->verbosePrint("[BASE URL NOT MATCH WITH BASEHOST]", $this->pageUrl);
                         $this->_crawler = false;
                     }
-                }
-                while($redirect);
+                } while ($redirect);
                 if ($this->client->getInternalResponse()->getStatus() !== 200) {
                     $this->verbosePrint("[!] ".$this->pageUrl, "Response Status is not 200");
                     $this->_crawler = false;
@@ -132,6 +131,14 @@ class CrawlPage extends BaseObject
                         $node->parentNode->removeChild($node);
                     }
                 });
+                $class = $crawler->filter('ul')->attr('class');
+                if (strpos($class, 'navbar') !== false) {
+                    $crawler->filter('ul')->each(function (Crawler $crawler) {
+                        foreach ($crawler as $node) {
+                            $node->parentNode->removeChild($node);
+                        }
+                    });
+                }
             }
 
 
@@ -146,7 +153,6 @@ class CrawlPage extends BaseObject
                     $node->parentNode->removeChild($node);
                 }
             });
-
 
             return $crawler->filter('body')->html();
         } catch (\Exception $e) {
@@ -208,12 +214,12 @@ class CrawlPage extends BaseObject
                 if ($module->initialization === false) {
                     $links[$key][1] = http_build_url($url,
                         [
-                        'query' => (isset($host['query'])) ? $host['query'] : [],
+                            'query' => (isset($url2['query'])) ? $url2['query'] : [],
                         ], HTTP_URL_JOIN_QUERY | HTTP_URL_STRIP_FRAGMENT);
                 } else {
                     $links[$key][1] = self::cleanupString(http_build_url($url,
                                 [
-                            'query' => (isset($url2['query'])) ? $url2['query'] : [],
+                                    'query' => (isset($url2['query'])) ? $url2['query'] : [],
                                 ], HTTP_URL_JOIN_QUERY | HTTP_URL_STRIP_FRAGMENT));
                 }
             }
@@ -233,7 +239,7 @@ class CrawlPage extends BaseObject
         }
 
         try {
-            return  $crawler->filterXPath('//html')->attr('lang');
+            return $crawler->filterXPath('//html')->attr('lang');
         } catch (\Exception $e) {
             // catch "The current node list is empty." exception
         }
