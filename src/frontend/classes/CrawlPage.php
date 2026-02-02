@@ -18,71 +18,65 @@ use luya\helpers\Html;
  *
  * @since 1.0.0
  */
-class CrawlPage extends BaseObject
-{
+class CrawlPage extends BaseObject {
+
     public $pageUrl;
     public $client;
     public $baseUrl;
     public $baseHost;
-    public $useH1        = false;
+    public $useH1 = false;
     private $_crawler;
-    public $verbose      = false;
+    public $verbose = false;
     public $verboseDebug = false;
 
-    public function __clone()
-    {
+    public function __clone() {
         $this->flush();
     }
 
-    public function init()
-    {
+    public function init() {
         if ($this->baseUrl === null) {
             throw new InvalidConfigException('baseUrl properties can not be null.');
         }
 
         $info = parse_url($this->baseUrl);
 
-        $this->baseHost = $info['scheme'].'://'.$info['host'];
+        $this->baseHost = $info['scheme'] . '://' . $info['host'];
 
         if (isset($info['port'])) {
-            $this->baseHost .= ':'.$info['port'];
+            $this->baseHost .= ':' . $info['port'];
         }
     }
 
-    public function verbosePrint($key, $value = null, $debug = false)
-    {
+    public function verbosePrint($key, $value = null, $debug = false) {
         if (($this->verboseDebug == true && $debug == true) || ($this->verboseDebug == false && $this->verbose == true)) {
-            echo $key.': '.$value.PHP_EOL;
+            echo $key . ': ' . $value . PHP_EOL;
         } else if ($this->verbose && $this->verboseDebug == false) {
-            echo $key.': '.$value.PHP_EOL;
+            echo $key . ': ' . $value . PHP_EOL;
         }
     }
 
-    public function flush()
-    {
+    public function flush() {
         $this->_crawler = null;
-        $this->pageUrl  = null;
+        $this->pageUrl = null;
     }
 
-    public function setCrawler(Crawler $crawler)
-    {
+    public function setCrawler(Crawler $crawler) {
         $this->_crawler = $crawler;
     }
 
-    public function getCrawler()
-    {
+    public function getCrawler() {
         if ($this->_crawler === null) {
             try {
-                $redirect     = false;
+                $redirect = false;
                 $this->client = new Client();
                 do {
                     $this->_crawler = $this->client->request('GET', $this->pageUrl);
                     if (strpos($this->pageUrl, $this->baseHost) === 0) {
                         $this->verbosePrint("[GENERATE REQUEST TO]", $this->pageUrl);
 
-                        if ($this->client->getInternalResponse()->getStatus() === 302) {
+                        if ($this->client->getInternalResponse()->getStatusCode() === 302) {
                             $this->pageUrl = $this->client->getInternalResponse()->getHeader("Location");
-                            $redirect      = true;
+                            $redirect = true;
                         } else {
                             $redirect = false;
                         }
@@ -91,8 +85,8 @@ class CrawlPage extends BaseObject
                         $this->_crawler = false;
                     }
                 } while ($redirect);
-                if ($this->client->getInternalResponse()->getStatus() !== 200) {
-                    $this->verbosePrint("[!] ".$this->pageUrl, "Response Status is not 200");
+                if ($this->client->getInternalResponse()->getStatusCode() !== 200) {
+                    $this->verbosePrint("[!] " . $this->pageUrl, "Response Status is not 200");
                     $this->_crawler = false;
                 }
             } catch (\Exception $e) {
@@ -103,8 +97,7 @@ class CrawlPage extends BaseObject
         return $this->_crawler;
     }
 
-    public function getCrawlerHtml()
-    {
+    public function getCrawlerHtml() {
         try {
             $crawler = $this->getCrawler();
 
@@ -112,35 +105,46 @@ class CrawlPage extends BaseObject
                 return '';
             }
 
-            $pageUrl   = rtrim($this->pageUrl, '/');
-            $baseUrl   = rtrim(\Yii::$app->getModule('crawler')->baseUrl, '/');
-            $suffixArr = \Yii::$app->getModule('crawler')->suffixBaseUrlLang;
-            $urls[]    = $baseUrl;
-            foreach ($suffixArr as $urlPage) {
-                $urls[] = rtrim($baseUrl.'/'.ltrim($urlPage, '/'), '/');
-            }
 
-            if (!in_array($pageUrl, $urls)) {
-                $crawler->filter('nav')->each(function (Crawler $crawler) {
-                    foreach ($crawler as $node) {
-                        $node->parentNode->removeChild($node);
-                    }
-                });
-                $crawler->filter('footer')->each(function (Crawler $crawler) {
-                    foreach ($crawler as $node) {
-                        $node->parentNode->removeChild($node);
-                    }
-                });
-                $class = $crawler->filter('ul')->attr('class');
-                if (strpos($class, 'navbar') !== false) {
-                    $crawler->filter('ul')->each(function (Crawler $crawler) {
-                        foreach ($crawler as $node) {
-                            $node->parentNode->removeChild($node);
-                        }
-                    });
+            $crawler->filter('nav')->each(function (Crawler $crawler) {
+                foreach ($crawler as $node) {
+                    $node->parentNode->removeChild($node);
                 }
+            });
+            $crawler->filter('footer')->each(function (Crawler $crawler) {
+                foreach ($crawler as $node) {
+                    $node->parentNode->removeChild($node);
+                }
+            });
+            $class = $crawler->filter('ul')->attr('class');
+            if (strpos($class, 'navbar') !== false) {
+                $crawler->filter('ul')->each(function (Crawler $crawler) {
+                    foreach ($crawler as $node) {
+                        $node->parentNode->removeChild($node);
+                    }
+                });
             }
-
+           
+            $crawler->filter('[class^="navbar"]')->each(function (Crawler $crawler) {
+                foreach ($crawler as $node) {
+                    $node->parentNode->removeChild($node);
+                }
+            });
+            $crawler->filter('[id^="footer"]')->each(function (Crawler $crawler) {
+                foreach ($crawler as $node) {
+                    $node->parentNode->removeChild($node);
+                }
+            });
+            $crawler->filter('[id^="header"]')->each(function (Crawler $crawler) {
+                foreach ($crawler as $node) {
+                    $node->parentNode->removeChild($node);
+                }
+            });
+            $crawler->filter('.sr-only')->each(function (Crawler $crawler) {
+                foreach ($crawler as $node) {
+                    $node->parentNode->removeChild($node);
+                }
+            });
 
             $crawler->filter('script')->each(function (Crawler $crawler) {
                 foreach ($crawler as $node) {
@@ -160,8 +164,7 @@ class CrawlPage extends BaseObject
         }
     }
 
-    public function getContentType()
-    {
+    public function getContentType() {
         $crawler = $this->getCrawler();
 
         if (!$crawler) {
@@ -171,8 +174,7 @@ class CrawlPage extends BaseObject
         return $this->client->getResponse()->getHeader('Content-Type');
     }
 
-    public function getLinks()
-    {
+    public function getLinks() {
         try {
 
             $crawler = $this->getCrawler();
@@ -193,34 +195,34 @@ class CrawlPage extends BaseObject
                     continue;
                 }
 
-                $url  = parse_url($item[1]);
+                $url = parse_url($item[1]);
                 $url2 = $url;
 
                 if (!isset($url['host']) || !isset($url['scheme'])) {
                     $base = $this->baseHost;
                 } else {
-                    $base = $url['scheme'].'://'.$url['host'];
+                    $base = $url['scheme'] . '://' . $url['host'];
                 }
 
-                $path   = null;
+                $path = null;
                 $module = \Yii::$app->getModule('crawler');
 
                 if (isset($url['path'])) {
                     $path = $url['path'];
                 }
 
-                $url            = rtrim($base, "/")."/".ltrim($path, "/");
+                $url = rtrim($base, "/") . "/" . ltrim($path, "/");
                 $links[$key][0] = self::cleanupString($links[$key][0]);
                 if ($module->initialization === false) {
                     $links[$key][1] = http_build_url($url,
-                        [
-                            'query' => (isset($url2['query'])) ? $url2['query'] : [],
-                        ], HTTP_URL_JOIN_QUERY | HTTP_URL_STRIP_FRAGMENT);
+                            [
+                                'query' => (isset($url2['query'])) ? $url2['query'] : [],
+                            ], HTTP_URL_JOIN_QUERY | HTTP_URL_STRIP_FRAGMENT);
                 } else {
                     $links[$key][1] = self::cleanupString(http_build_url($url,
-                                [
-                                    'query' => (isset($url2['query'])) ? $url2['query'] : [],
-                                ], HTTP_URL_JOIN_QUERY | HTTP_URL_STRIP_FRAGMENT));
+                                            [
+                                                'query' => (isset($url2['query'])) ? $url2['query'] : [],
+                                            ], HTTP_URL_JOIN_QUERY | HTTP_URL_STRIP_FRAGMENT));
                 }
             }
 
@@ -230,8 +232,7 @@ class CrawlPage extends BaseObject
         }
     }
 
-    public function getLanguageInfo()
-    {
+    public function getLanguageInfo() {
         $crawler = $this->getCrawler();
 
         if (!$crawler) {
@@ -239,7 +240,13 @@ class CrawlPage extends BaseObject
         }
 
         try {
-            return $crawler->filterXPath('//html')->attr('lang');
+
+            $lang =  $crawler->filterXPath('//html')->attr('lang');
+            $explode = explode('-',$lang);
+            if(count($explode) == 2){
+                $lang = $explode[0];
+            }
+            return $lang;
         } catch (\Exception $e) {
             // catch "The current node list is empty." exception
         }
@@ -247,8 +254,7 @@ class CrawlPage extends BaseObject
         return null;
     }
 
-    public function getTitleTag()
-    {
+    public function getTitleTag() {
         $crawler = $this->getCrawler();
 
         if (!$crawler) {
@@ -268,8 +274,7 @@ class CrawlPage extends BaseObject
         return null;
     }
 
-    public function getTitle()
-    {
+    public function getTitle() {
         $crawler = $this->getCrawler();
 
         if (!$crawler) {
@@ -296,8 +301,7 @@ class CrawlPage extends BaseObject
         return $text;
     }
 
-    public function getMetaKeywords()
-    {
+    public function getMetaKeywords() {
         $crawler = $this->getCrawler();
 
         if (!$crawler) {
@@ -313,8 +317,7 @@ class CrawlPage extends BaseObject
         return null;
     }
 
-    public function getMetaDescription()
-    {
+    public function getMetaDescription() {
         $crawler = $this->getCrawler();
 
         if (!$crawler) {
@@ -330,8 +333,7 @@ class CrawlPage extends BaseObject
         return null;
     }
 
-    public function getTitleH1()
-    {
+    public function getTitleH1() {
         $crawler = $this->getCrawler();
 
         if (!$crawler) {
@@ -352,8 +354,7 @@ class CrawlPage extends BaseObject
         return null;
     }
 
-    public function getTitleCrawlerTag()
-    {
+    public function getTitleCrawlerTag() {
         $content = $this->getCrawlerHtml();
 
         preg_match_all("/\[CRAWL_TITLE\](.*?)\[\/CRAWL_TITLE\]/", $content, $results);
@@ -366,8 +367,7 @@ class CrawlPage extends BaseObject
         return false;
     }
 
-    public function getGroup()
-    {
+    public function getGroup() {
         try {
             $content = $this->getCrawlerHtml();
 
@@ -384,8 +384,7 @@ class CrawlPage extends BaseObject
         }
     }
 
-    private function tempGetContent()
-    {
+    private function tempGetContent() {
         try {
             $bodyContent = preg_replace('/\s+/', ' ', $this->getCrawlerHtml());
 
@@ -418,8 +417,7 @@ class CrawlPage extends BaseObject
         }
     }
 
-    public function getContent()
-    {
+    public function getContent() {
         try {
             $this->verbosePrint('get content for', $this->pageUrl);
             return self::cleanupString($this->tempGetContent());
@@ -428,8 +426,7 @@ class CrawlPage extends BaseObject
         }
     }
 
-    public static function cleanupString($string)
-    {
+    public static function cleanupString($string) {
         // strip tags and stuff
         $content = strip_tags($string);
 
