@@ -1,5 +1,6 @@
 {
 	"name" : "open2/crawler",
+	"license": "GPL-3.0-or-later",
 	"description" : "An full search page crawler to enable complex and customized searching abilities.",
 	"type" : "luya-module",
 	"keywords" : [
