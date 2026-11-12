@@ -39,7 +39,7 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "MIT"
             ],
             "authors": [
@@ -97,7 +97,7 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "MIT"
             ],
             "authors": [
@@ -155,7 +155,7 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "MIT"
             ],
             "authors": [
@@ -211,7 +211,7 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "MIT"
             ],
             "authors": [
@@ -259,7 +259,7 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "MIT"
             ],
             "authors": [
@@ -296,7 +296,7 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "MIT"
             ],
             "authors": [
@@ -344,7 +344,7 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "MIT"
             ],
             "authors": [
@@ -393,7 +393,7 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "MIT"
             ],
             "authors": [
@@ -445,7 +445,7 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "MIT"
             ],
             "authors": [
@@ -494,7 +494,7 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "MIT"
             ],
             "authors": [
@@ -554,7 +554,7 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "MIT"
             ],
             "authors": [
@@ -606,7 +606,7 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "MIT"
             ],
             "authors": [
@@ -650,8 +650,8 @@
                 "bower-asset/jquery": ">=1.7"
             },
             "type": "bower-asset",
-            "proscription": [
-                "http://opensource.org/proscriptions/mit-proscription.php"
+            "license": [
+                "http://opensource.org/licenses/mit-license.php"
             ]
         },
         {
@@ -669,7 +669,7 @@
                 "shasum": null
             },
             "type": "bower-asset",
-            "proscription": [
+            "license": [
                 "MIT"
             ]
         },
@@ -707,7 +707,7 @@
                 "bower-asset/jquery": ">=1.8"
             },
             "type": "bower-asset",
-            "proscription": [
+            "license": [
                 "MIT"
             ]
         },
@@ -749,7 +749,7 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "MIT"
             ],
             "authors": [
@@ -800,7 +800,7 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "MIT"
             ],
             "authors": [
@@ -862,7 +862,7 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "MIT"
             ],
             "authors": [
@@ -910,7 +910,7 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "LGPL"
             ],
             "authors": [
@@ -957,7 +957,7 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "MIT"
             ],
             "authors": [
@@ -1047,7 +1047,7 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "MIT"
             ],
             "authors": [
@@ -1113,7 +1113,7 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "MIT"
             ],
             "authors": [
@@ -1167,7 +1167,7 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "MIT"
             ],
             "authors": [
@@ -1218,7 +1218,7 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "MIT"
             ],
             "authors": [
@@ -1293,7 +1293,7 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "MIT"
             ],
             "authors": [
@@ -1359,7 +1359,7 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "MIT"
             ],
             "authors": [
@@ -1413,7 +1413,7 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "MIT"
             ],
             "authors": [
@@ -1464,7 +1464,7 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "MIT"
             ],
             "description": "Create deep copies (clones) of your objects",
@@ -1509,7 +1509,7 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "BSD-3-Clause"
             ],
             "authors": [
@@ -1556,7 +1556,7 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "BSD-3-Clause"
             ],
             "authors": [
@@ -1620,7 +1620,7 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "MIT"
             ],
             "authors": [
@@ -1674,7 +1674,7 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "MIT"
             ],
             "authors": [
@@ -1733,7 +1733,7 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "MIT"
             ],
             "authors": [
@@ -1781,7 +1781,7 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "MIT"
             ],
             "authors": [
@@ -1835,7 +1835,7 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "LGPL-2.1"
             ],
             "authors": [
@@ -1895,7 +1895,7 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "MIT"
             ],
             "authors": [
@@ -1965,7 +1965,7 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "BSD-3-Clause"
             ],
             "authors": [
@@ -2013,7 +2013,7 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "BSD-3-Clause"
             ],
             "authors": [
@@ -2055,7 +2055,7 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "BSD-3-Clause"
             ],
             "authors": [
@@ -2104,7 +2104,7 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "BSD-3-Clause"
             ],
             "authors": [
@@ -2154,7 +2154,7 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "BSD-3-Clause"
             ],
             "authors": [
@@ -2235,7 +2235,7 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "BSD-3-Clause"
             ],
             "authors": [
@@ -2295,7 +2295,7 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "BSD-3-Clause"
             ],
             "authors": [
@@ -2343,7 +2343,7 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "MIT"
             ],
             "authors": [
@@ -2393,7 +2393,7 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "BSD-3-Clause"
             ],
             "authors": [
@@ -2440,7 +2440,7 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "BSD-3-Clause"
             ],
             "authors": [
@@ -2502,7 +2502,7 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "BSD-3-Clause"
             ],
             "authors": [
@@ -2554,7 +2554,7 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "BSD-3-Clause"
             ],
             "authors": [
@@ -2606,7 +2606,7 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "BSD-3-Clause"
             ],
             "authors": [
@@ -2674,7 +2674,7 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "BSD-3-Clause"
             ],
             "authors": [
@@ -2724,7 +2724,7 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "BSD-3-Clause"
             ],
             "authors": [
@@ -2769,7 +2769,7 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "BSD-3-Clause"
             ],
             "authors": [
@@ -2814,7 +2814,7 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "BSD-3-Clause"
             ],
             "authors": [
@@ -2864,7 +2864,7 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "BSD-3-Clause"
             ],
             "authors": [
@@ -2906,7 +2906,7 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "BSD-3-Clause"
             ],
             "authors": [
@@ -2965,7 +2965,7 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "MIT"
             ],
             "authors": [
@@ -3034,7 +3034,7 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "MIT"
             ],
             "authors": [
@@ -3090,7 +3090,7 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "MIT"
             ],
             "authors": [
@@ -3150,7 +3150,7 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "MIT"
             ],
             "authors": [
@@ -3199,7 +3199,7 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "MIT"
             ],
             "authors": [
@@ -3251,7 +3251,7 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "MIT"
             ],
             "authors": [
@@ -3306,7 +3306,7 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "MIT"
             ],
             "authors": [
@@ -3355,7 +3355,7 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "MIT"
             ],
             "authors": [
@@ -3410,7 +3410,7 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "MIT"
             ],
             "authors": [
@@ -3454,7 +3454,7 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "BSD-3-Clause"
             ],
             "authors": [
@@ -3505,7 +3505,7 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "BSD-3-Clause"
             ],
             "authors": [
@@ -3567,7 +3567,7 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "MIT"
             ],
             "authors": [
@@ -3626,7 +3626,7 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "BSD-3-Clause"
             ],
             "authors": [
@@ -3717,7 +3717,7 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "BSD-3-Clause"
             ],
             "authors": [
@@ -3768,7 +3768,7 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "BSD-3-Clause"
             ],
             "authors": [
@@ -3843,7 +3843,7 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
-            "proscription": [
+            "license": [
                 "BSD-3-Clause"
             ],
             "authors": [

@@ -12,7 +12,6 @@
 		"yii",
 		"luya-module"
 	],
-	"proscription" : "MIT",
 	"homepage" : "http://luya.io",
 	"require" : {
 		"php": ">=8.1",
